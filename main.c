@@ -40,10 +40,9 @@ int main(int argc, char **argv)
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
 	}
-
+	line_number = 1;
 	while (getline(&lineptr, &n, file) != -1)
 	{
-		line_number = 1;
 		opcode = strtok(lineptr, " \t\n");
 		if (opcode == NULL || opcode[0] == '#')
 		{
