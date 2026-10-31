@@ -16,7 +16,7 @@ stack_t *top = NULL;
 int main(int argc, char **argv)
 {
 	FILE *file;
-	char *opcode;
+	char *opcode, *filename;
 	char *argument;
 	int value, val;
 	unsigned int line_number;
@@ -34,9 +34,10 @@ int main(int argc, char **argv)
 	}
 
 	file = fopen(argv[1], "r");
+	filename = name_of_file(argv[1]);
 	if (file == NULL)
 	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
 	}
 
@@ -83,6 +84,7 @@ int main(int argc, char **argv)
 		line_number++;
 	}
 	free(lineptr);
+	free_stacks(top);
 	return (0);
 }
 
