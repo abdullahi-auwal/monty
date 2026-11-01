@@ -3,6 +3,8 @@
 
 /**
  * free_stacks - free the stacks
+ * @linepter: ptr to lineptr
+ * @file: ptr to the file
  */
 void free_stacks(char **lineptr, FILE *file)
 {
