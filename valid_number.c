@@ -7,7 +7,7 @@
  * is_valid_number - checks if its a valid number
  * @argument: the argument
  *
- * return: 0 if not valid
+ * Return: 0 if not valid
  */
 int is_valid_number(char *argument)
 {

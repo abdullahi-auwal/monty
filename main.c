@@ -39,7 +39,6 @@ int main(int argc, char **argv)
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
-		fclose(file);
 		exit(EXIT_FAILURE);
 	}
 	line_number = 1;
