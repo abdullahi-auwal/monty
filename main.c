@@ -82,17 +82,17 @@ int main(int argc, char **argv)
 				fclose(file);
 				exit(EXIT_FAILURE);
 			}
+			stack = malloc(sizeof(stack_t));
+			if (stack == NULL)
+			{
+				fprintf(stderr, "Error: malloc failed\n");
+				free(lineptr);
+				free_stacks();
+				fclose(file);
+				exit(EXIT_FAILURE);
+			}
+			stack->n = value;
 		}
-		stack = malloc(sizeof(stack_t));
-		if (stack == NULL)
-		{
-			fprintf(stderr, "Error: malloc failed\n");
-			free(lineptr);
-			free_stacks();
-			fclose(file);
-			exit(EXIT_FAILURE);
-		}
-		stack->n = value;
 		call_opcode_func(opcode, &stack, line_number);
 		line_number++;
 	}
