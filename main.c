@@ -74,6 +74,8 @@ int main(int argc, char **argv)
 			value = atoi(argument);
 			if (value == 0)
 				val = check_zero(argument);
+			else
+				val = is_valid_number(argument);
 			if (val == 0)
 			{
 				fprintf(stderr, "L%d: usage: push integer\n", line_number);
@@ -143,7 +145,7 @@ int check_zero(char *argument)
 /**
  * call_opcode_func - calls the opcode function
  * @opcode: the opcode
- * @stack_ptr: pointer to the pointer to the stack
+ * @stack: pointer to the pointer to the stack
  * @line_number: the line count
  */
 void call_opcode_func(char *opcode, stack_t **stack, unsigned int line_number)
