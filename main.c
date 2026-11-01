@@ -18,13 +18,14 @@ int main(int argc, char **argv)
 	FILE *file;
 	char *opcode, *filename;
 	char *argument;
-	int value, val;
+	int value;
 	unsigned int line_number;
 	stack_t *stack;
 
 	char *lineptr = NULL;
 	size_t n = 0;
 	int valid = -1;
+	int val = -1;
 	(void)top;
 
 	if ((argc == 1) || (argc > 2))
