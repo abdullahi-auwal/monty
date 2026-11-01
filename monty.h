@@ -2,6 +2,7 @@
 #define MONTY_H_
 
 #define _GNU_SOURCE
+#include <stdio.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or a queue)
@@ -39,8 +40,13 @@ int check_opcode_valid(char *opcode);
 int check_zero(char *argument);
 void call_opcode_func(char *opcode, stack_t **stack, unsigned int line_number);
 void push(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
+void add(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+void nop(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 char *name_of_file(char *path);
-void free_stacks(void);
+void free_stacks(char **lineptr, FILE *file);
 int is_valid_number(char *argument);
 #endif /* MONTY_H_ */

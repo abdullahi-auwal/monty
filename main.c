@@ -54,9 +54,7 @@ int main(int argc, char **argv)
 		if (valid == 0)
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
-			free(lineptr);
-			free_stacks();
-			fclose(file);
+			free_stacks(&lineptr, file);
 			exit(EXIT_FAILURE);
 		}
 		if (valid == 1)
@@ -65,9 +63,7 @@ int main(int argc, char **argv)
 			if (argument == NULL)
 			{
 				fprintf(stderr, "L%d: usage: push integer\n", line_number);
-				free(lineptr);
-				free_stacks();
-				fclose(file);
+				free_stacks(&lineptr, file);
 				exit(EXIT_FAILURE);
 			}
 			value = atoi(argument);
@@ -78,18 +74,14 @@ int main(int argc, char **argv)
 			if (val == 0)
 			{
 				fprintf(stderr, "L%d: usage: push integer\n", line_number);
-				free(lineptr);
-				free_stacks();
-				fclose(file);
+				free_stacks(&lineptr, file);
 				exit(EXIT_FAILURE);
 			}
 			stack = malloc(sizeof(stack_t));
 			if (stack == NULL)
 			{
 				fprintf(stderr, "Error: malloc failed\n");
-				free(lineptr);
-				free_stacks();
-				fclose(file);
+				free_stacks(&lineptr, file);
 				exit(EXIT_FAILURE);
 			}
 			stack->n = value;
@@ -97,9 +89,7 @@ int main(int argc, char **argv)
 		call_opcode_func(opcode, &stack, line_number);
 		line_number++;
 	}
-	free(lineptr);
-	free_stacks();
-	fclose(file);
+	free_stacks(&lineptr, file);
 	return (0);
 }
 
@@ -113,13 +103,23 @@ int main(int argc, char **argv)
  */
 int check_opcode_valid(char *opcode)
 {
-	char *valid_funcs[] = {"push", "pall"};
+	char *valid_funcs[] = {"push", "pall", "pint", "pop", "swap", "add", "nop"};
 
 	if (opcode != NULL)
 	{
 		if (strcmp(opcode, valid_funcs[0]) == 0)
 			return (1);
-		else if(strcmp(opcode, valid_funcs[1]) == 0)
+		if (strcmp(opcode, valid_funcs[1]) == 0)
+			return (2);
+		if (strcmp(opcode, valid_funcs[2]) == 0)
+			return (2);
+		if (strcmp(opcode, valid_funcs[3]) == 0)
+			return (2);
+		if (strcmp(opcode, valid_funcs[4]) == 0)
+			return (2);
+		if (strcmp(opcode, valid_funcs[5]) == 0)
+			return (2);
+		if (strcmp(opcode, valid_funcs[6]) == 0)
 			return (2);
 	}
 
@@ -153,6 +153,11 @@ void call_opcode_func(char *opcode, stack_t **stack, unsigned int line_number)
 	instruction_t instructions[] = {
 		{"push", push},
 		{"pall", pall},
+		{"pint", pint},
+		{"pop", pop},
+		{"swap", swap},
+		{"add", add},
+		{"nop", nop},
 		{NULL, NULL}
 	};
 

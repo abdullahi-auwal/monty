@@ -4,7 +4,7 @@
 /**
  * free_stacks - free the stacks
  */
-void free_stacks(void)
+void free_stacks(char **lineptr, FILE *file)
 {
 	stack_t *tmp;
 
@@ -15,4 +15,7 @@ void free_stacks(void)
 		free(tmp);
 	}
 	top = NULL;
+
+	free(*lineptr);
+	fclose(file);
 }
