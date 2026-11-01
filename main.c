@@ -39,6 +39,7 @@ int main(int argc, char **argv)
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
+		fclose(file);
 		exit(EXIT_FAILURE);
 	}
 	line_number = 1;
@@ -54,6 +55,9 @@ int main(int argc, char **argv)
 		if (valid == 0)
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
+			free(lineptr);
+			free_stacks();
+			fclose(file);
 			exit(EXIT_FAILURE);
 		}
 		if (valid == 1)
@@ -62,6 +66,9 @@ int main(int argc, char **argv)
 			if (argument == NULL)
 			{
 				fprintf(stderr, "L%d: usage: push integer\n", line_number);
+				free(lineptr);
+				free_stacks();
+				fclose(file);
 				exit(EXIT_FAILURE);
 			}
 			value = atoi(argument);
@@ -70,6 +77,9 @@ int main(int argc, char **argv)
 			if (val == 0)
 			{
 				fprintf(stderr, "L%d: usage: push integer\n", line_number);
+				free(lineptr);
+				free_stacks();
+				fclose(file);
 				exit(EXIT_FAILURE);
 			}
 		}
@@ -77,6 +87,9 @@ int main(int argc, char **argv)
 		if (stack == NULL)
 		{
 			fprintf(stderr, "Error: malloc failed\n");
+			free(lineptr);
+			free_stacks();
+			fclose(file);
 			exit(EXIT_FAILURE);
 		}
 		stack->n = value;
@@ -84,7 +97,8 @@ int main(int argc, char **argv)
 		line_number++;
 	}
 	free(lineptr);
-	free_stacks(top);
+	free_stacks();
+	fclose(file);
 	return (0);
 }
 

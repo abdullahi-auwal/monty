@@ -18,9 +18,9 @@ void push(stack_t **stack, unsigned int line_number)
 	}
 	else
 	{
-		top->prev = *stack;
 		(*stack)->next = top;
 		(*stack)->prev = NULL;
+		top->prev = *stack;
 		top = *stack;
 	}
 }

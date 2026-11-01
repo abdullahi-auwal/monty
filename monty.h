@@ -41,5 +41,5 @@ void call_opcode_func(char *opcode, stack_t **stack, unsigned int line_number);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 char *name_of_file(char *path);
-void free_stacks(stack_t *top);
+void free_stacks(void);
 #endif /* MONTY_H_ */

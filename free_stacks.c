@@ -3,9 +3,8 @@
 
 /**
  * free_stacks - free the stacks
- * @top: pointer to the top of the stack
  */
-void free_stacks(stack_t *top)
+void free_stacks(void)
 {
 	stack_t *tmp;
 
@@ -15,4 +14,5 @@ void free_stacks(stack_t *top)
 		top = tmp->next;
 		free(tmp);
 	}
+	top = NULL;
 }
