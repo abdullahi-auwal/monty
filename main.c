@@ -135,6 +135,8 @@ int check_zero(char *argument)
 {
 	if ((argument[0] == '0') && (argument[1] == '\0'))
 		return (1);
+	if ((argument[0] == '-') && (argument[2] == '\0'))
+		return (1);
 	return (0);
 }
 

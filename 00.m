@@ -1,6 +1,2 @@
-push 1
-
-
-push 2
-push
+push -23
 pall
